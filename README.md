@@ -22,6 +22,8 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![MLflow](https://img.shields.io/badge/MLflow-Tracking-0194E2?style=flat-square&logo=mlflow&logoColor=white)](https://mlflow.org)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docker.com)
 [![License](https://img.shields.io/badge/License-MIT-22C55E?style=flat-square)](LICENSE)
 [![SDG 9](https://img.shields.io/badge/SDG-9%20Innovation-F36D25?style=flat-square)](https://sdgs.un.org/goals/goal9)
 [![SDG 12](https://img.shields.io/badge/SDG-12%20Responsible%20Consumption-CF8D2A?style=flat-square)](https://sdgs.un.org/goals/goal12)
@@ -324,8 +326,69 @@ Every training run automatically records:
 
 All telemetry is stored locally in `artifacts/` and `experiments/results.csv` for full reproducibility — no external tracking server required.
 
----
 
+The platform integrates **MLflow** for end-to-end experiment management, enabling structured tracking of reinforcement learning workflows across training and evaluation pipelines.
+
+### MLflow Features Integrated
+
+| Capability | Description |
+|---|---|
+| Experiment Tracking | PPO and DQN runs logged independently |
+| Metric Logging | Reward, revenue, volatility, trust, inventory metrics |
+| Artifact Management | Training plots, metadata, evaluation outputs |
+| Parameter Tracking | Hyperparameters from `config.yaml` |
+| Benchmark Logging | PPO, DQN, and baseline comparisons |
+| Reproducibility | Timestamped experiment histories |
+
+### Logged Artifacts
+
+- Reward convergence curves
+- PPO vs DQN comparison plots
+- Evaluation summaries
+- Hyperparameter metadata
+- Experiment CSV logs
+- Model checkpoints
+
+### Launch MLflow UI
+
+```bash
+mlflow ui
+```
+
+Dashboard available at:
+
+```text
+http://localhost:5000
+```
+
+MLflow enables structured experiment reproducibility, training observability, and operational benchmarking across all reinforcement learning workflows.
+
+---
+## Dockerized Execution
+
+The complete RL experimentation pipeline is containerized using Docker for portability, reproducibility, and environment consistency.
+
+### Build Docker Image
+
+```bash
+docker build -t dynamic-pricing-rl .
+```
+
+### Run Evaluation Inside Docker
+
+```bash
+docker run -v %cd%/artifacts:/app/artifacts dynamic-pricing-rl python training/evaluate.py
+```
+
+### Docker Features
+
+- Portable execution environment
+- Dependency isolation
+- Reproducible training/evaluation workflows
+- Containerized experiment benchmarking
+- Artifact persistence through mounted volumes
+
+The Dockerized setup mirrors production ML deployment practices and simplifies reproducible experimentation across environments.
 ## Reproducibility
 
 The system enforces deterministic execution end-to-end:
